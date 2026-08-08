@@ -11,8 +11,18 @@ const errorHandler = require(
 );
 
 const app = express();
-
+// Basic - allow all origins (fine for local dev, not for production)
 app.use(cors());
+
+// Production-appropriate - restrict to specific origin(s)
+// const corsOptions = {
+//   origin: 'http://localhost:3000', // or your frontend's actual domain
+//   credentials: true, // needed if you're sending cookies / auth headers
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// };
+
+// app.use(cors(corsOptions));
 
 app.use(helmet());
 
