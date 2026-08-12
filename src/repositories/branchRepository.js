@@ -17,8 +17,8 @@ async function getBranchById(id) {
     return rows[0];
 }
 
-async function createBranch(user) {
-    const { companyid, name, address, isactive, addedby } = user;
+async function createBranch(branch) {
+    const { companyid, name, address, isactive, addedby } = branch;
 
     const [result] = await db.query(
         `

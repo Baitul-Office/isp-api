@@ -8,11 +8,18 @@ async function GetAllCompanies() {
     return rows;
 }
 
+
 async function getCompanyById(id) {
     const [rows] = await db.query(
-        "select * from isp_company where id = ?",
+        "SELECT * FROM isp_company WHERE id = ?",
         [id]
     );
+
+    if (rows.length === 0) {
+        return null;
+    }
+
+    return rows[0];
 }
 
 async function createCompany(company) {

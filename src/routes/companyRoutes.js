@@ -28,14 +28,14 @@ router.get("/", controller.getCompanies);
  *         name: id
  *         required: true
  *         schema:
- *           type: string
+ *           type: integer
+ *         description: Company ID
  *     responses:
  *       200:
  *         description: Company found
  *       404:
  *         description: Company not found
  */
-
 router.get("/:id", controller.getCompany);
 
 /**

@@ -46,8 +46,15 @@ async function createBranch(req, res, next) {
         });
 
     } catch (err) {
+console.error("========== CREATE BRANCH ERROR ==========");
+        console.error(err);
+        console.error("MESSAGE:", err.message);
+        console.error("STACK:", err.stack);
 
-        next(err);
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
 
     }
 }
