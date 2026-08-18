@@ -18,6 +18,20 @@ async function getZoneById(id) {
     return zone;
 }
 
+async function getZoneByBranchId(id) {
+    if (!id) {
+        throw new Error("Branch ID is required");
+    }
+    
+    const zone = await repository.getZoneByBranchid(id);
+
+    if (!zone) {
+        throw new Error("Zone not found");
+    }
+
+    return zone;
+}
+
 async function createZone(data) {
 
     if (!data.branchid) {
@@ -82,6 +96,7 @@ async function deleteZone(id) {
 module.exports = {
     getZones,
     getZoneById,
+    getZoneByBranchId,
     createZone,
     updateZone,
     deleteZone

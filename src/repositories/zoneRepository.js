@@ -48,6 +48,31 @@ async function getZoneById(id) {
     return rows[0];
 }
 
+
+async function getZoneByBranchid(id) {
+    const sql = `
+        SELECT
+            z.id,
+            z.branchid,
+            b.name AS branchname,
+            z.name,
+            z.code,
+            z.description,
+            z.isactive,
+            z.addedby,
+            z.addeddate,
+            z.updatedby,
+            z.updateddate
+        FROM isp_zone z
+        INNER JOIN isp_branch b
+            ON b.id = z.branchid
+        WHERE z.branchid = ?
+    `;
+
+    const [rows] = await db.query(sql, [id]);
+    return rows;
+}
+
 async function createZone(zone) {
     const sql = `
         INSERT INTO isp_zone
@@ -117,6 +142,7 @@ async function deleteZone(id) {
 module.exports = {
     getZones,
     getZoneById,
+    getZoneByBranchid,
     createZone,
     updateZone,
     deleteZone

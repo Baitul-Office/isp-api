@@ -51,6 +51,37 @@ async function getZoneById(req, res) {
 }
 
 
+async function getZoneByBranchId(req, res) {
+    try {
+
+        const { branchid } = req.params;
+
+        console.log("Branch ID received:", branchid);
+
+        const data = await service.getZoneByBranchId(branchid);
+
+        res.json({
+            success: true,
+            data: data
+        });
+
+    } catch (err) {
+
+        console.error("getZoneByBranchId error:", err);
+
+        const status =
+            err.message === "Zone not found"
+                ? 404
+                : 500;
+
+        res.status(status).json({
+            success: false,
+            message: err.message
+        });
+    }
+}
+
+
 async function createZone(req, res) {
     try {
 
@@ -144,6 +175,7 @@ async function deleteZone(req, res) {
 module.exports = {
     getZones,
     getZoneById,
+    getZoneByBranchId,
     createZone,
     updateZone,
     deleteZone
